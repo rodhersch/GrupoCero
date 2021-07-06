@@ -1,0 +1,32 @@
+{% extends 'app/base.html' %} {% load static %} {% block css %} {% endblock %}
+{% block js %} {% endblock %} {% block contenido %}
+
+<div class="container my-5 text-center">
+  <h2 class="display-4">
+    Usuarios que han utilizado <br />
+    nuestros servicios
+  </h2>
+  <hr />
+
+  <button class="btn btn-primary" onclick="traer()">Obtener<br /></button>
+
+  <div class="mt-5" id="contenido"></div>
+</div>
+
+<script>
+  var contenido = document.querySelector("#contenido");
+  function traer() {
+    fetch("https://randomuser.me/api/")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.results["0"]);
+        contenido.innerHTML = ` <img src="${data.results["0"].picture.large}" width="100px" class="img-fluid rounded-circle">
+        <p>Nombre: ${data.results["0"].name.last}</p>
+        <p>Correo electrónico: ${data.results["0"].email}</p>
+        <p>Teléfono: ${data.results["0"].phone}</p>
+        `;
+      });
+  }
+</script>
+
+{% endblock %}
