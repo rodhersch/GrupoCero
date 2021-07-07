@@ -5,6 +5,49 @@ from django.contrib import messages
 
 # Create your views here.
 
+def listar_proveedores(request):
+    proveedores = Proveedor.objects.all()
+
+    contexto = {
+        'proveedores' : proveedores
+    }
+    return render(request, 'app/listar_proveedores.html', contexto)
+
+def nuevo_proveedor (request):
+    data = {
+        'form' : ProveedorForm()
+    }
+    if request.method=='POST':
+        formulario = ProveedorForm(data=request.POST, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request,"Agregado correctamente")
+            return redirect(to="/listar-proveedores/")
+        else:
+            data["form"] = formulario
+    return render(request, 'app/nuevo_proveedor.html', data)
+
+def modificar_proveedor (request,id):
+    proveedor =get_object_or_404(Proveedor,rut = id)
+    datos = {
+        'form' : ProveedorForm(instance=proveedor)
+    }
+    if request.method=='POST':
+        formulario = ProveedorForm(data=request.POST,instance=proveedor,files=request.FILES)
+        if formulario.is_valid:
+            formulario.save()
+            messages.success(request,"Modificado correctamente")
+            return redirect(to="/listar-proveedores/")
+        else:
+           datos["form"] = formulario
+    return render(request, 'app/modificar_proveedor.html', datos)
+
+def eliminar_proveedor(request,id):
+    proveedor = get_object_or_404(Proveedor,rut = id)
+    proveedor.delete()
+    messages.success(request,"Eliminado correctamente")
+    return redirect(to="listar_proveedores")
+
 def index(request):
     return render(request, 'app/index.html')
 
@@ -60,50 +103,7 @@ def registrate(request):
 
 def contacto(request):
     return render(request, 'app/contacto.html')
-
-def listar_proveedores(request):
-    proveedores = Proveedor.objects.all()
-
-    contexto = {
-        'proveedores' : proveedores
-    }
-    return render(request, 'app/listar_proveedores.html', contexto)
-
-def nuevo_proveedor (request):
-    data = {
-        'form' : ProveedorForm()
-    }
-    if request.method=='POST':
-        formulario = ProveedorForm(data=request.POST, files=request.FILES)
-        if formulario.is_valid():
-            formulario.save()
-            messages.success(request,"Agregado correctamente")
-            return redirect(to="/listar-proveedores/")
-        else:
-            data["form"] = formulario
-    return render(request, 'app/nuevo_proveedor.html', data)
-
-def modificar_proveedor (request,id):
-    proveedor =get_object_or_404(Proveedor,rut = id)
-    datos = {
-        'form' : ProveedorForm(instance=proveedor)
-    }
-    if request.method=='POST':
-        formulario = ProveedorForm(data=request.POST,instance=proveedor,files=request.FILES)
-        if formulario.is_valid:
-            formulario.save()
-            messages.success(request,"Modificado correctamente")
-            return redirect(to="/listar-proveedores/")
-        else:
-           datos["form"] = formulario
-    return render(request, 'app/modificar_proveedor.html', datos)
-
-def eliminar_proveedor(request,id):
-    proveedor = get_object_or_404(Proveedor,rut = id)
-    proveedor.delete()
-    messages.success(request,"Eliminado correctamente")
-    return redirect(to="listar_proveedores")
-
+    
 # def registrar(request):
 #     if request.method=="POST":
 #         if request.POST["password"] != request.POST["confirm_password"]:
