@@ -64,12 +64,20 @@
               <a class="nav-link" href="/artistas/">Artistas</a>
             </li>
             <li class="nav-item mr-1">
-              <a class="nav-link" href="/nosotros/">Compañía</a>
+              <a class="nav-link" href="/listar-proveedores/">Proveedores</a>
             </li>
-
+            {% if user.is_authenticated %}
             <li class="nav-item mr-1">
-              <a class="nav-link" href="/sesion/">Iniciar Sesión</a>
+              <a class="nav-link" href="{% url 'logout'  %}">Cerrar Sesión</a>
             </li>
+            <li class="nav-item mr-1">
+              <a class="nav-link" href=#">@{{ user.username }}</a>
+            </li>
+            {% else %}
+            <li class="nav-item mr-1">
+              <a class="nav-link" href="{% url 'login'  %}">Iniciar Sesión</a>
+            </li>
+            {% endif %}
           </ul>
         </div>
       </div>
@@ -90,9 +98,7 @@
                 </li>
 
                 <li>
-                  <a class="" href="#" title="Responsabilidad social"
-                    >Responsabilidad social</a
-                  >
+                  <a class="" href="/nosotros/" title="Acerca de">Acerca de</a>
                 </li>
               </ul>
             </div>
@@ -132,9 +138,6 @@
         </div>
       </div>
     </footer>
-
-    {% block js %} {% endblock %}
-
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -150,5 +153,19 @@
       integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
       crossorigin="anonymous"
     ></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {% block js %} {% endblock %}
+    
+    {% if messages %} {% for m in messages %}
+    <script>
+      Swal.fire({
+        title: "Felicitaciones",
+        text: "{{m}}",
+        icon: "success",
+      });
+    </script>
+    {% endfor %} {% endif %}
+    
   </body>
 </html>

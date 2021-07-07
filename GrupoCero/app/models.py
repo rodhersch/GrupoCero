@@ -9,7 +9,7 @@ class Servicio (models.Model):
     nombre_servicio = models.CharField(max_length=50, verbose_name="Servicio")
 
 
-    def str(self):
+    def __str__(self):
 
         return self.nombre_servicio
 
@@ -27,6 +27,7 @@ class Proveedor (models.Model):
 
     servicio = models.ForeignKey(Servicio, on_delete=models.CASCADE)
 
-    def str(self):
+    def __str__(self):
 
         return self.nombre
+
