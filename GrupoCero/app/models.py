@@ -15,7 +15,7 @@ class Servicio (models.Model):
 
 class Proveedor (models.Model):
 
-    rut = models.CharField(max_length=13 , primary_key=True, verbose_name="Rut proveedor")
+    rut = models.IntegerField(primary_key=True, verbose_name="Rut proveedor")
 
     nombre = models.CharField(max_length=50, verbose_name="Nombre")
 

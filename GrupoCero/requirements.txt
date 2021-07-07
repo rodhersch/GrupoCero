@@ -2,3 +2,4 @@ django == 3.2.5
 pillow
 django-crispy-forms
 djangorestframework
+django-allauth

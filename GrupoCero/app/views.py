@@ -77,11 +77,10 @@ def nuevo_proveedor (request):
         formulario = ProveedorForm(data=request.POST, files=request.FILES)
         if formulario.is_valid():
             formulario.save()
-            messages.success(request,"Agregado Correctamente")
+            messages.success(request,"Agregado correctamente")
             return redirect(to="/listar-proveedores/")
         else:
             data["form"] = formulario
-            data['mensaje']="Cambios no guardados"
     return render(request, 'app/nuevo_proveedor.html', data)
 
 def modificar_proveedor (request,id):
@@ -93,7 +92,7 @@ def modificar_proveedor (request,id):
         formulario = ProveedorForm(data=request.POST,instance=proveedor,files=request.FILES)
         if formulario.is_valid:
             formulario.save()
-            messages.success(request,"Modificado Correctamente")
+            messages.success(request,"Modificado correctamente")
             return redirect(to="/listar-proveedores/")
         else:
            datos["form"] = formulario
@@ -102,7 +101,7 @@ def modificar_proveedor (request,id):
 def eliminar_proveedor(request,id):
     proveedor = get_object_or_404(Proveedor,rut = id)
     proveedor.delete()
-    messages.success(request,"Eliminado Correctamente")
+    messages.success(request,"Eliminado correctamente")
     return redirect(to="listar_proveedores")
 
 # def registrar(request):
