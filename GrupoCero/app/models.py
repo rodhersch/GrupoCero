@@ -31,3 +31,12 @@ class Proveedor (models.Model):
 
         return self.nombre
 
+<<<<<<< HEAD
+=======
+class Usuarios(models.Model):
+    nombre=models.CharField(max_length=50, null = True)
+    apellido=models.CharField(max_length=50, null = True)
+    email=models.EmailField(null = True)
+    contrasenia=models.CharField(max_length=50, null = True)
+    comuna=models.CharField(max_length=50, null = True)
+>>>>>>> 854fc337b84d02f50086dcf3c6f5c6a577c7a0e7

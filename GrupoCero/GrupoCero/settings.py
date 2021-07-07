@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
+<<<<<<< HEAD
     'rest_framework',
     'crispy_forms',
     # 'django.contrib.sites',
@@ -49,6 +50,9 @@ INSTALLED_APPS = [
     # 'allauth.account',
     # 'allauth.socialaccount',
     # 'allauth.socialaccount.providers.google',
+=======
+    'crispy_forms',
+>>>>>>> 854fc337b84d02f50086dcf3c6f5c6a577c7a0e7
 ]
 
 MIDDLEWARE = [
