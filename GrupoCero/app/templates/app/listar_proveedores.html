@@ -1,11 +1,7 @@
-{% extends 'app/base.html' %} {% load static %} {% block css %} {%endblock%}
-<<<<<<< HEAD
-{%block js %}
+{% extends 'app/base.html' %} {% load static %} {% block css %} {% endblock %}
+{% block js %}
 <script src="{% static 'app/js/confirmacion.js'%}"></script>
 {% endblock %} {% block contenido %}
-=======
-{%block js %} {% endblock %} {% block contenido %}
->>>>>>> 854fc337b84d02f50086dcf3c6f5c6a577c7a0e7
 
 <div class="card">
   <div class="card-body">
@@ -32,11 +28,7 @@
           <td>{{p.servicio}}</td>
           <td>
             <a
-<<<<<<< HEAD
-              href="{% url 'modificar_proveedor' p.rut %}"
-=======
               href="{% url 'modificar-proveedor' p.rut %}"
->>>>>>> 854fc337b84d02f50086dcf3c6f5c6a577c7a0e7
               class="btn btn-warning btn-sm"
               >Modificar</a
             >
