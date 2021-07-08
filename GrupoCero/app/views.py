@@ -1,12 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
-<<<<<<< HEAD
-from .models import Proveedor
-from .forms import ProveedorForm
-=======
 from .models import Proveedor, Usuarios
-from .forms import ProveedorForm, UsuarioForm
->>>>>>> 854fc337b84d02f50086dcf3c6f5c6a577c7a0e7
+from .forms import ProveedorForm, CustomUserCreationForm
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
 
 # Create your views here.
 
@@ -46,6 +42,25 @@ def modificar_proveedor (request,id):
         else:
            datos["form"] = formulario
     return render(request, 'app/modificar_proveedor.html', datos)
+
+def registrar(request):
+
+    data= {
+        'form': CustomUserCreationForm()
+    }
+
+    if request.method == 'POST':
+        formulario = CustomUserCreationForm(data = request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            user = authenticate(username=formulario.cleaned_data["username"],password=formulario.cleaned_data["password1"])
+            login(request,user)
+            messages.success(request,"Enviado Correctamente")
+            return redirect(to="index")
+            
+        data["form"] = formulario
+
+    return render(request,'registration/registrate.html',data)
 
 def eliminar_proveedor(request,id):
     proveedor = get_object_or_404(Proveedor,rut = id)
@@ -108,113 +123,6 @@ def registrate(request):
 
 def contacto(request):
     return render(request, 'app/contacto.html')
-<<<<<<< HEAD
+
+
     
-# def registrar(request):
-#     if request.method=="POST":
-#         if request.POST["password"] != request.POST["confirm_password"]:
-#             return render(request, "registrate.html")
-#         nombre=request.POST["fullname"]
-#         apellido=request.POST["lastname"]
-#         email=request.POST["email"]
-#         contrasenia=request.POST["password"]
-#         comuna=request.POST["comuna"]           
-#         nuevo_usuario=Usuarios(
-#             nombre=nombre,
-#             apellido=apellido,
-#             email=email,
-#             contrasenia=contrasenia,
-#             comuna=comuna
-#         )
-#         nuevo_usuario.save()
-#     return render(request, "registrate.html")
-    
-# def registrar(request):
-# ------------------------------------------------------
-=======
-
-def listar_proveedores(request):
-    proveedores = Proveedor.objects.all()
-
-    contexto = {
-        'proveedores' : proveedores
-    }
-    return render(request, 'app/listar_proveedores.html')
-
-def nuevo_proveedor (request):
-    data = {
-        'form' : ProveedorForm()
-    }
-    if request.method=='POST':
-        formulario = ProveedorForm(data=request.POST, files=request.FILES)
-        if formulario.is_valid():
-            formulario.save()
-            messages.success(request,"Agregado Correctamente")
-            return redirect(to="/listar-proveedores/")
-        else:
-            data["form"] = formulario
-            data['mensaje']="Cambios no guardados"
-    return render(request, 'app/nuevo_proveedor.html', data)
-
-def modificar_proveedor (request,id):
-    proveedor =get_object_or_404(Proveedor,rut = id)
-    datos = {
-        'form' : ProveedorForm(instance=proveedor)
-    }
-    if request.method=='POST':
-        formulario = ProveedorForm(data=request.POST,instance=proveedor,files=request.FILES)
-        if formulario.is_valid:
-            formulario.save()
-            messages.success(request,"Modificado Correctamente")
-            return redirect(to="/listar-proveedores/")
-        else:
-           datos["form"] = formulario
-    return render(request, 'app/modificar_proveedor.html', datos)
-
-def eliminar_proveedor(request,id):
-    proveedor = get_object_or_404(Proveedor,rut = id)
-    proveedor.delete()
-    messages.success(request,"Eliminado Correctamente")
-    return redirect(to="listar_proveedores")
-
-def registrar(request):
-    if request.method=="POST":
-        if request.POST["password"] != request.POST["confirm_password"]:
-            return render(request, "registrate.html")
-        nombre=request.POST["fullname"]
-        apellido=request.POST["lastname"]
-        email=request.POST["email"]
-        contrasenia=request.POST["password"]
-        comuna=request.POST["comuna"]           
-        nuevo_usuario=Usuarios(
-            nombre=nombre,
-            apellido=apellido,
-            email=email,
-            contrasenia=contrasenia,
-            comuna=comuna
-        )
-        nuevo_usuario.save()
-    return render(request, "registrate.html")
-    
-# def registrar(request):
-
->>>>>>> 854fc337b84d02f50086dcf3c6f5c6a577c7a0e7
-#     data = {
-#         'form' : UsuarioForm()
-#     }
-#     if request.method=='POST':
-#         formulario = UsuarioForm(data=request.POST)
-#         if formulario.is_valid():
-
-#             formulario.save()
-#             # messages.success(request,"Agregado Correctamente")
-#             return redirect(to="app/registrate.html")
-#         else:
-#             data["form"] = formulario
-#             data['mensaje']="Cambios no guardados"
-<<<<<<< HEAD
-#     return render(request, 'app/registrate.html.html', data)
-
-=======
-#     return render(request, 'app/registrate.html.html', data)
->>>>>>> 854fc337b84d02f50086dcf3c6f5c6a577c7a0e7

@@ -1,9 +1,5 @@
 django == 3.2.5
 pillow
 django-crispy-forms
-<<<<<<< HEAD
 djangorestframework
 django-allauth
-=======
-djangorestframework
->>>>>>> 854fc337b84d02f50086dcf3c6f5c6a577c7a0e7

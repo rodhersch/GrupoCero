@@ -42,17 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
-<<<<<<< HEAD
     'rest_framework',
     'crispy_forms',
-    # 'django.contrib.sites',
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    # 'allauth.socialaccount.providers.google',
-=======
-    'crispy_forms',
->>>>>>> 854fc337b84d02f50086dcf3c6f5c6a577c7a0e7
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -142,15 +138,16 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# SITE_ID = 1
-# SOCIALACCOUNT_PROVIDERS = {
-#     'google' : {
-#         'SCOPE' : [
-#             'profile',
-#             'email',
-#         ],
-#         'AUTH_PARAMS' : {
-#             'access_type': 'online',
-#         }
-#     }
-# }
+SITE_ID = 1
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google' : {
+        'SCOPE' : [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS' : {
+            'access_type': 'online',
+        }
+    }
+}
