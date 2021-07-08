@@ -1,7 +1,9 @@
-{% extends 'app/base.html' %} {% load static %} {% block css %} <link rel="stylesheet" href="{% static 'app/css/login.css' %}" />
+{% extends 'app/base.html' %} {% load static %} {% load socialaccount %} {% block css %} <link rel="stylesheet" href="{% static 'app/css/login.css' %}" />
 {% endblock %} {% block js %} <script src="{% static 'app/js/login.js' %}" />
-{% endblock %} {% block contenido %}
+{% endblock %} 
+{% block contenido %}
 {% load crispy_forms_tags %}
+
 
 <div class="login container">
     <div class="card card-container">
@@ -16,7 +18,9 @@
           <a href="#" class="forgot-password">
               ¿Olvidaste tu contraseña?
           </a>
-          <p>¿No tienes cuenta? <a href="/registrate/" class="forgot-password"> Regístrate aquí</a></p>
-      </div>
+          <p>¿No tienes cuenta? <a href="/registrar/" class="forgot-password"> Regístrate aquí</a></p>
+      
+        <a href="{% provider_login_url 'google' %}"> Iniciar sesión con Google</a>
+    </div>
 </div>
 {% endblock %}

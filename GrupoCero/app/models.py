@@ -30,10 +30,3 @@ class Proveedor (models.Model):
     def __str__(self):
 
         return self.nombre
-
-class Usuarios(models.Model):
-    nombre=models.CharField(max_length=50, null = True)
-    apellido=models.CharField(max_length=50, null = True)
-    email=models.EmailField(null = True)
-    contrasenia=models.CharField(max_length=50, null = True)
-    comuna=models.CharField(max_length=50, null = True)

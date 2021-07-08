@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Proveedor, Usuarios
+from .models import Proveedor
 from .forms import ProveedorForm, CustomUserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
@@ -54,8 +54,8 @@ def registrar(request):
         if formulario.is_valid():
             formulario.save()
             user = authenticate(username=formulario.cleaned_data["username"],password=formulario.cleaned_data["password1"])
-            login(request,user)
             messages.success(request,"Enviado Correctamente")
+            login(request,user)
             return redirect(to="index")
             
         data["form"] = formulario
@@ -98,7 +98,6 @@ def artista6(request):
 
 def artistas(request):
     return render(request, 'app/artistas.html')
-
 
 def esculturas(request):
     return render(request, 'app/esculturas.html')

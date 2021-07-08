@@ -1,16 +1,11 @@
 from django import forms
-from .models import Proveedor, Usuarios
+from .models import Proveedor
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 class ProveedorForm(forms.ModelForm):
     class Meta:
         model = Proveedor
-        fields = '__all__'
-
-class UsuarioForm(forms.ModelForm):
-    class Meta:
-        model = Usuarios
         fields = '__all__'
 
 class CustomUserCreationForm(UserCreationForm):
